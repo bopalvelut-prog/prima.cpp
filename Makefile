@@ -356,8 +356,8 @@ ifdef LLAMA_DEBUG
 	endif
 else
 	MK_CPPFLAGS   += -DNDEBUG
-	MK_CFLAGS     += -O3 -g
-	MK_CXXFLAGS   += -O3 -g
+	MK_CFLAGS     += -O3 -g -fomit-frame-pointer -funswitch-loops -fgcse-sm -fgcse-las -funsafe-math-optimizations
+	MK_CXXFLAGS   += -O3 -g -fomit-frame-pointer -funswitch-loops -fgcse-sm -fgcse-las -funsafe-math-optimizations
 	MK_NVCCFLAGS  += -O3 -g
 endif
 
@@ -458,8 +458,9 @@ ifndef RISCV_CROSS_COMPILE
 
 ifeq ($(UNAME_M),$(filter $(UNAME_M),x86_64 i686 amd64))
 	# Use all CPU extensions that are available:
-	MK_CFLAGS     += -march=native -mtune=native
-	HOST_CXXFLAGS += -march=native -mtune=native
+	# Optimized for Intel Celeron 1000M (Ivy Bridge) - supports SSE4.2, AVX
+	MK_CFLAGS     += -march=native -mtune=haswell -funroll-loops -fno-math-errno -funsafe-math-optimizations -fprefetch-loop-arrays -funsafe-loop-optimizations
+	HOST_CXXFLAGS += -march=native -mtune=haswell -funroll-loops -fno-math-errno -funsafe-math-optimizations -fprefetch-loop-arrays -funsafe-loop-optimizations
 
 	# Usage AVX-only
 	#MK_CFLAGS   += -mfma -mf16c -mavx
