@@ -93,6 +93,12 @@ Here are the models we have tested so far. You can also try more on Hugging Face
 - **Qwen 2.5-72B (Q4K, Q6K, Q80):** [Qwen2.5-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-72B-Instruct-GGUF)
 - **QwQ-32B (Q4K, Q6K, Q80):** [qwq-32b](https://huggingface.co/Qwen/QwQ-32B-GGUF)
 
+### Qwen 3 / QwQ 3 / Qwen 3.5
+- **Qwen 3-8B (Q4K, Q6K, Q80):** [Qwen3-8B-GGUF](https://huggingface.co/Qwen/Qwen3-8B-GGUF)
+- **Qwen 3-32B (Q4K, Q6K, Q80):** [Qwen3-32B-GGUF](https://huggingface.co/Qwen/Qwen3-32B-GGUF)
+- **Qwen 3.5-8B (Q4K, Q6K, Q80):** [Qwen3.5-8B-GGUF](https://huggingface.co/Qwen/Qwen3.5-8B-GGUF)
+- **Qwen 3.5-32B (Q4K, Q6K, Q80):** [Qwen3.5-32B-GGUF](https://huggingface.co/Qwen/Qwen3.5-32B-GGUF)
+
 ### DeepSeek
 - **DeepSeek R1-7B (Q4K, Q6K, Q80):** [deepseek-ai.DeepSeek-R1-Distill-Qwen-7B](https://huggingface.co/DevQuasar/deepseek-ai.DeepSeek-R1-Distill-Qwen-7B-GGUF)
 - **DeepSeek R1-8B (Q4K, Q6K, Q80):** [deepseek-ai.DeepSeek-R1-Distill-Llama-8B](https://huggingface.co/DevQuasar/deepseek-ai.DeepSeek-R1-Distill-Llama-8B-GGUF)

@@ -200,6 +200,10 @@ enum llm_arch {
     LLM_ARCH_QWEN,
     LLM_ARCH_QWEN2,
     LLM_ARCH_QWEN2MOE,
+    LLM_ARCH_QWEN3,
+    LLM_ARCH_QWEN3MOE,
+    LLM_ARCH_QWEN35,
+    LLM_ARCH_QWEN35MOE,
     LLM_ARCH_PHI2,
     LLM_ARCH_PHI3,
     LLM_ARCH_PLAMO,
@@ -253,6 +257,10 @@ static const std::map<llm_arch, const char *> LLM_ARCH_NAMES = {
     { LLM_ARCH_QWEN,            "qwen"         },
     { LLM_ARCH_QWEN2,           "qwen2"        },
     { LLM_ARCH_QWEN2MOE,        "qwen2moe"     },
+    { LLM_ARCH_QWEN3,           "qwen3"        },
+    { LLM_ARCH_QWEN3MOE,        "qwen3moe"     },
+    { LLM_ARCH_QWEN35,          "qwen35"       },
+    { LLM_ARCH_QWEN35MOE,       "qwen35moe"    },
     { LLM_ARCH_PHI2,            "phi2"         },
     { LLM_ARCH_PHI3,            "phi3"         },
     { LLM_ARCH_PLAMO,           "plamo"        },
@@ -934,9 +942,87 @@ static const std::map<llm_arch, std::map<llm_tensor, const char *>> LLM_TENSOR_N
             { LLM_TENSOR_FFN_DOWN_EXPS,      "blk.%d.ffn_down_exps" },
             { LLM_TENSOR_FFN_UP_EXPS,        "blk.%d.ffn_up_exps" },
             { LLM_TENSOR_FFN_GATE_INP_SHEXP, "blk.%d.ffn_gate_inp_shexp" },
-            { LLM_TENSOR_FFN_GATE_SHEXP,     "blk.%d.ffn_gate_shexp" },
+            { LLM_TENSOR_FFN_GATE_SHEXP,    "blk.%d.ffn_gate_shexp" },
             { LLM_TENSOR_FFN_DOWN_SHEXP,     "blk.%d.ffn_down_shexp" },
             { LLM_TENSOR_FFN_UP_SHEXP,       "blk.%d.ffn_up_shexp" },
+        },
+    },
+    {
+        LLM_ARCH_QWEN3,
+        {
+            { LLM_TENSOR_TOKEN_EMBD,      "token_embd" },
+            { LLM_TENSOR_OUTPUT_NORM,     "output_norm" },
+            { LLM_TENSOR_OUTPUT,          "output" },
+            { LLM_TENSOR_ATTN_NORM,       "blk.%d.attn_norm" },
+            { LLM_TENSOR_ATTN_Q,          "blk.%d.attn_q" },
+            { LLM_TENSOR_ATTN_K,          "blk.%d.attn_k" },
+            { LLM_TENSOR_ATTN_V,          "blk.%d.attn_v" },
+            { LLM_TENSOR_ATTN_OUT,        "blk.%d.attn_output" },
+            { LLM_TENSOR_ATTN_Q_NORM,     "blk.%d.attn_q_norm" },
+            { LLM_TENSOR_ATTN_K_NORM,     "blk.%d.attn_k_norm" },
+            { LLM_TENSOR_FFN_NORM,        "blk.%d.ffn_norm" },
+            { LLM_TENSOR_FFN_GATE,        "blk.%d.ffn_gate" },
+            { LLM_TENSOR_FFN_DOWN,        "blk.%d.ffn_down" },
+            { LLM_TENSOR_FFN_UP,          "blk.%d.ffn_up" },
+        },
+    },
+    {
+        LLM_ARCH_QWEN3MOE,
+        {
+            { LLM_TENSOR_TOKEN_EMBD,         "token_embd" },
+            { LLM_TENSOR_OUTPUT_NORM,        "output_norm" },
+            { LLM_TENSOR_OUTPUT,             "output" },
+            { LLM_TENSOR_ATTN_NORM,          "blk.%d.attn_norm" },
+            { LLM_TENSOR_ATTN_Q,             "blk.%d.attn_q" },
+            { LLM_TENSOR_ATTN_K,             "blk.%d.attn_k" },
+            { LLM_TENSOR_ATTN_V,             "blk.%d.attn_v" },
+            { LLM_TENSOR_ATTN_OUT,           "blk.%d.attn_output" },
+            { LLM_TENSOR_ATTN_Q_NORM,        "blk.%d.attn_q_norm" },
+            { LLM_TENSOR_ATTN_K_NORM,        "blk.%d.attn_k_norm" },
+            { LLM_TENSOR_FFN_NORM,           "blk.%d.ffn_norm" },
+            { LLM_TENSOR_FFN_GATE_INP,       "blk.%d.ffn_gate_inp" },
+            { LLM_TENSOR_FFN_GATE_EXPS,      "blk.%d.ffn_gate_exps" },
+            { LLM_TENSOR_FFN_DOWN_EXPS,      "blk.%d.ffn_down_exps" },
+            { LLM_TENSOR_FFN_UP_EXPS,        "blk.%d.ffn_up_exps" },
+        },
+    },
+    {
+        LLM_ARCH_QWEN35,
+        {
+            { LLM_TENSOR_TOKEN_EMBD,      "token_embd" },
+            { LLM_TENSOR_OUTPUT_NORM,     "output_norm" },
+            { LLM_TENSOR_OUTPUT,          "output" },
+            { LLM_TENSOR_ATTN_NORM,       "blk.%d.attn_norm" },
+            { LLM_TENSOR_ATTN_Q,          "blk.%d.attn_q" },
+            { LLM_TENSOR_ATTN_K,          "blk.%d.attn_k" },
+            { LLM_TENSOR_ATTN_V,          "blk.%d.attn_v" },
+            { LLM_TENSOR_ATTN_OUT,        "blk.%d.attn_output" },
+            { LLM_TENSOR_ATTN_Q_NORM,     "blk.%d.attn_q_norm" },
+            { LLM_TENSOR_ATTN_K_NORM,     "blk.%d.attn_k_norm" },
+            { LLM_TENSOR_FFN_NORM,        "blk.%d.ffn_norm" },
+            { LLM_TENSOR_FFN_GATE,        "blk.%d.ffn_gate" },
+            { LLM_TENSOR_FFN_DOWN,        "blk.%d.ffn_down" },
+            { LLM_TENSOR_FFN_UP,          "blk.%d.ffn_up" },
+        },
+    },
+    {
+        LLM_ARCH_QWEN35MOE,
+        {
+            { LLM_TENSOR_TOKEN_EMBD,         "token_embd" },
+            { LLM_TENSOR_OUTPUT_NORM,        "output_norm" },
+            { LLM_TENSOR_OUTPUT,             "output" },
+            { LLM_TENSOR_ATTN_NORM,          "blk.%d.attn_norm" },
+            { LLM_TENSOR_ATTN_Q,             "blk.%d.attn_q" },
+            { LLM_TENSOR_ATTN_K,             "blk.%d.attn_k" },
+            { LLM_TENSOR_ATTN_V,             "blk.%d.attn_v" },
+            { LLM_TENSOR_ATTN_OUT,           "blk.%d.attn_output" },
+            { LLM_TENSOR_ATTN_Q_NORM,        "blk.%d.attn_q_norm" },
+            { LLM_TENSOR_ATTN_K_NORM,        "blk.%d.attn_k_norm" },
+            { LLM_TENSOR_FFN_NORM,           "blk.%d.ffn_norm" },
+            { LLM_TENSOR_FFN_GATE_INP,       "blk.%d.ffn_gate_inp" },
+            { LLM_TENSOR_FFN_GATE_EXPS,      "blk.%d.ffn_gate_exps" },
+            { LLM_TENSOR_FFN_DOWN_EXPS,      "blk.%d.ffn_down_exps" },
+            { LLM_TENSOR_FFN_UP_EXPS,        "blk.%d.ffn_up_exps" },
         },
     },
     {
@@ -6081,6 +6167,35 @@ static void llm_load_hparams(
                     default: model.type = e_model::MODEL_UNKNOWN;
                 }
             } break;
+        case LLM_ARCH_QWEN3:
+        case LLM_ARCH_QWEN35:
+            {
+                ml.get_key(LLM_KV_ATTENTION_LAYERNORM_RMS_EPS, hparams.f_norm_rms_eps);
+                // Qwen3/35 uses q_norm and k_norm, similar to Qwen2
+                switch (hparams.n_layer) {
+                    case 24: model.type = e_model::MODEL_1B; break;
+                    case 28: model.type = e_model::MODEL_3B; break;
+                    case 32: model.type = e_model::MODEL_7B; break;
+                    case 40: model.type = e_model::MODEL_14B; break;
+                    case 48: model.type = e_model::MODEL_32B; break;
+                    case 64: model.type = e_model::MODEL_57B_A14B; break;
+                    default: model.type = e_model::MODEL_UNKNOWN;
+                }
+            } break;
+        case LLM_ARCH_QWEN3MOE:
+        case LLM_ARCH_QWEN35MOE:
+            {
+                ml.get_key(LLM_KV_EXPERT_FEED_FORWARD_LENGTH, hparams.n_ff_exp, false);
+                ml.get_key(LLM_KV_EXPERT_SHARED_FEED_FORWARD_LENGTH, hparams.n_ff_shexp, false);
+
+                ml.get_key(LLM_KV_ATTENTION_LAYERNORM_RMS_EPS, hparams.f_norm_rms_eps);
+                switch (hparams.n_layer) {
+                    case 24: model.type = e_model::MODEL_A1_7B; break;
+                    case 28: model.type = e_model::MODEL_A2_7B; break;
+                    case 32: model.type = e_model::MODEL_57B_A14B; break;
+                    default: model.type = e_model::MODEL_UNKNOWN;
+                }
+            } break;
         case LLM_ARCH_PHI2:
             {
                 ml.get_key(LLM_KV_ATTENTION_LAYERNORM_EPS, hparams.f_norm_eps);
@@ -6712,7 +6827,7 @@ static void llm_load_vocab(
                 vocab.type_pre = LLAMA_VOCAB_PRE_TYPE_COMMAND_R;
                 vocab.tokenizer_clean_spaces = false;
             } else if (
-                tokenizer_pre == "qwen2" || tokenizer_pre == "deepseek-r1-qwen") {
+                tokenizer_pre == "qwen2" || tokenizer_pre == "qwen35" || tokenizer_pre == "deepseek-r1-qwen") {
                 vocab.type_pre = LLAMA_VOCAB_PRE_TYPE_QWEN2;
                 vocab.tokenizer_clean_spaces = false;
             } else if (
@@ -7480,6 +7595,97 @@ static void llm_load_qwen2_tensors(
     }
 }
 
+static void llm_load_qwen35_tensors(
+    llama_model_loader & ml,
+    llama_model        & model,
+    std::map<ggml_backend_buffer_type_t, ggml_context *> & ctx_map,
+    uint32_t             n_world, 
+    uint32_t             my_rank, 
+    const uint32_t     * n_layer_window,
+    bool               * use_mmap_buffer,
+    bool                 set_needed) {
+    const auto tn = LLM_TN(model.arch);
+
+    ggml_context * ctx_input        = nullptr;
+    ggml_context * ctx_output       = nullptr;
+    ggml_context * ctx_output_split = nullptr;
+
+    if (my_rank == 0) {
+        ctx_input        = ctx_map.at(model.buft_input.buft); 
+        ctx_output       = ctx_map.at(model.buft_output.buft);
+        ctx_output_split = ctx_map.at(model.buft_output.buft_matrix);
+    }
+
+    auto ctx_for_layer       = [&](int i) { return ctx_map.at(model.buft_layer[i].buft); };
+    auto ctx_for_layer_split = [&](int i) { return ctx_map.at(model.buft_layer[i].buft_matrix); };
+
+    const llama_hparams hparams = model.hparams;
+    const int64_t n_head        = hparams.n_head();
+    const int64_t n_embd        = hparams.n_embd;
+    const int64_t n_embd_k_gqa  = hparams.n_embd_k_gqa();
+    const int64_t n_embd_v_gqa  = hparams.n_embd_v_gqa();
+    const int64_t n_embd_head_k = hparams.n_embd_head_k;
+    const int64_t n_embd_gqa    = n_embd_v_gqa;
+    const int64_t n_ff          = hparams.n_ff();
+    const int64_t n_vocab       = hparams.n_vocab;
+    const int64_t n_layer       = hparams.n_layer;
+    const int64_t n_rot         = hparams.n_rot;    
+
+    if (my_rank == 0) {
+        // token embedding
+        model.tok_embd    = ml.create_tensor(ctx_input, tn(LLM_TENSOR_TOKEN_EMBD, "weight"), {n_embd, n_vocab}, 0, set_needed);
+        
+        // output
+        model.output_norm = ml.create_tensor(ctx_output, tn(LLM_TENSOR_OUTPUT_NORM, "weight"), {n_embd}, 0, set_needed);
+        model.output      = ml.create_tensor(ctx_output_split, tn(LLM_TENSOR_OUTPUT, "weight"), {n_embd, n_vocab}, llama_model_loader::TENSOR_NOT_REQUIRED, set_needed);
+        
+        // if output is NULL, init from the input tok embed
+        if (model.output == NULL) {
+            model.output = ml.create_tensor(ctx_output, tn(LLM_TENSOR_TOKEN_EMBD, "weight"), {n_embd, n_vocab}, llama_model_loader::TENSOR_DUPLICATED, set_needed);
+        }
+    }    
+
+    for (int i = 0; i < n_layer; ++i) {
+        if (!this_layer_is_mine(i, n_world, my_rank, n_layer_window)) {
+            continue;
+        }
+
+        int local_i = map_layer_to_local_id(i, n_world, my_rank, n_layer_window);
+        ggml_context * ctx_layer = ctx_for_layer(local_i);
+        ggml_context * ctx_split = ctx_for_layer_split(local_i);
+        
+        auto & layer = model.layers[local_i];
+        
+        // attention norm
+        layer.attn_norm = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_NORM, "weight", i), {n_embd}, 0, set_needed);
+
+        // attention
+        layer.wq = ml.create_tensor(ctx_split, tn(LLM_TENSOR_ATTN_Q,   "weight", i), {n_embd, n_embd_head_k * n_head}, 0, set_needed);
+        layer.wk = ml.create_tensor(ctx_split, tn(LLM_TENSOR_ATTN_K,   "weight", i), {n_embd, n_embd_k_gqa},           0, set_needed);
+        layer.wv = ml.create_tensor(ctx_split, tn(LLM_TENSOR_ATTN_V,   "weight", i), {n_embd, n_embd_v_gqa},           0, set_needed);
+        layer.wo = ml.create_tensor(ctx_split, tn(LLM_TENSOR_ATTN_OUT, "weight", i), {n_embd_head_k * n_head, n_embd}, 0, set_needed);
+
+        // attention bias tensors
+        layer.bq = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_Q,   "bias", i), {n_embd},     llama_model_loader::TENSOR_NOT_REQUIRED, set_needed);
+        layer.bk = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_K,   "bias", i), {n_embd_gqa}, llama_model_loader::TENSOR_NOT_REQUIRED, set_needed);
+        layer.bv = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_V,   "bias", i), {n_embd_gqa}, llama_model_loader::TENSOR_NOT_REQUIRED, set_needed);
+        layer.bo = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_OUT, "bias", i), {n_embd},     llama_model_loader::TENSOR_NOT_REQUIRED, set_needed);
+
+        // Qwen3 has q_norm and k_norm (per-head normalization)
+        layer.attn_q_norm = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_Q_NORM, "weight", i), {n_embd_head_k}, 0, set_needed);
+        layer.attn_k_norm = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ATTN_K_NORM, "weight", i), {n_embd_head_k}, 0, set_needed);
+
+        // feed-forward
+        layer.ffn_norm = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_FFN_NORM, "weight", i), {n_embd}, 0, set_needed);
+        
+        layer.ffn_gate = ml.create_tensor(ctx_split, tn(LLM_TENSOR_FFN_GATE, "weight", i), {n_embd, n_ff}, 0, set_needed);
+        layer.ffn_down = ml.create_tensor(ctx_split, tn(LLM_TENSOR_FFN_DOWN, "weight", i), {n_ff, n_embd}, 0, set_needed);
+        layer.ffn_up   = ml.create_tensor(ctx_split, tn(LLM_TENSOR_FFN_UP,   "weight", i), {n_embd, n_ff}, 0, set_needed);
+
+        layer.rope_freqs = ml.create_tensor(ctx_layer, tn(LLM_TENSOR_ROPE_FREQS, "weight"), {n_rot/2}, llama_model_loader::TENSOR_NOT_REQUIRED | (i != 0 ? llama_model_loader::TENSOR_DUPLICATED : 0), set_needed);
+    }
+}
+
 // Returns false if cancelled by progress_callback
 static bool llm_load_tensors_impl(
         llama_model_loader   &  ml,
@@ -8146,6 +8352,22 @@ static bool llm_load_tensors_impl(
                     }
                 } break;
             case LLM_ARCH_QWEN2:
+                llm_load_qwen2_tensors(ml, model, ctx_map, n_world, my_rank, n_layer_window, &use_mmap_buffer, true);
+                break;
+            case LLM_ARCH_QWEN3:
+                llm_load_qwen35_tensors(ml, model, ctx_map, n_world, my_rank, n_layer_window, &use_mmap_buffer, true);
+                break;
+            case LLM_ARCH_QWEN3MOE:
+                // Similar to QWEN2MOE but with q_norm and k_norm
+                // fall through for now, will be implemented separately
+                llm_load_qwen2_tensors(ml, model, ctx_map, n_world, my_rank, n_layer_window, &use_mmap_buffer, true);
+                break;
+            case LLM_ARCH_QWEN35:
+                llm_load_qwen35_tensors(ml, model, ctx_map, n_world, my_rank, n_layer_window, &use_mmap_buffer, true);
+                break;
+            case LLM_ARCH_QWEN35MOE:
+                // Similar to QWEN2MOE but with q_norm and k_norm
+                // fall through for now, will be implemented separately
                 llm_load_qwen2_tensors(ml, model, ctx_map, n_world, my_rank, n_layer_window, &use_mmap_buffer, true);
                 break;
             case LLM_ARCH_QWEN2MOE:
@@ -12825,6 +13047,204 @@ struct llm_build_context {
         return sub_gfs;
     }
 
+    std::vector<ggml_cgraph *> build_qwen35() {
+
+        const int64_t n_embd_head = hparams.n_embd_head_v;
+        GGML_ASSERT(n_embd_head == hparams.n_embd_head_k);
+        GGML_ASSERT(n_embd_head == hparams.n_rot);
+
+        // create a vector to hold the subgraphs
+        std::vector<struct ggml_cgraph *> sub_gfs; 
+        struct ggml_cgraph * sub_gf  = nullptr;
+        struct ggml_tensor * cur = nullptr;
+        struct ggml_tensor * inpL = nullptr;
+        struct ggml_tensor * inpB = nullptr;
+
+        const  uint32_t      n_world = this->cparams.n_world;
+        const  uint32_t      my_rank = this->cparams.rank;
+        const  uint32_t    * n_layer_window = this->cparams.n_layer_window;
+
+        if (my_rank == 0) {
+            sub_gf = ggml_new_graph_custom(ctx0, llama_model_max_nodes(model), false);
+
+            // inp_embd - contains the input embedding
+            inpL = llm_build_inp_embd(ctx0, lctx, hparams, batch, model.tok_embd, cb);
+
+            // build the input layer as a seperate subgraph
+            ggml_build_forward_expand(sub_gf, inpL);
+            sub_gfs.push_back(sub_gf);
+
+            sub_gf = nullptr;
+            inpL = nullptr;
+        }
+
+        // inpB - contains the output embedding from other nodes
+        inpB = llm_build_backend_embd(ctx0, lctx, hparams, batch, cb);
+          
+        // inp_pos - contains the positions
+        struct ggml_tensor * inp_pos = build_inp_pos();
+
+        // KQ_mask (mask for 1 head, it will be broadcasted to all heads)
+        struct ggml_tensor * KQ_mask = build_inp_KQ_mask();
+
+        for (int il = 0; il < n_layer; ++il) {
+            if (!this_layer_is_mine(il, n_world, my_rank, n_layer_window)) {
+                // if we have an active sub-graph, add it to the list 
+                if (sub_gf != nullptr && inpL != nullptr) {
+                    ggml_build_forward_expand(sub_gf, cur);
+                    sub_gfs.push_back(sub_gf);
+                    sub_gf = nullptr;
+                }
+                // synchronous input tensor
+                if (inpL != inpB) {
+                    inpL = inpB;
+                }
+                continue;
+            }
+
+            if (inpL == nullptr) {
+                inpL = inpB;
+            }
+
+            // start a new sub-graph
+            if (sub_gf == nullptr) {
+                sub_gf = ggml_new_graph_custom(ctx0, llama_model_max_nodes(model), false);
+            }
+
+            struct ggml_tensor * inpSA = inpL; // use for shortcut
+            int local_il = map_layer_to_local_id(il, n_world, my_rank, n_layer_window);
+            
+            // norm
+            cur = llm_build_norm(ctx0, inpL, hparams,
+                model.layers[local_il].attn_norm, NULL,
+                LLM_NORM_RMS, cb, il);
+            cb(cur, "attn_norm", il);
+
+            // self-attention
+            {
+                // compute Q and K and RoPE them
+                struct ggml_tensor * Qcur = llm_build_lora_mm(lctx, ctx0, model.layers[local_il].wq, cur);
+                cb(Qcur, "Qcur", il);
+                if (model.layers[local_il].bq) {
+                    Qcur = ggml_add(ctx0, Qcur, model.layers[local_il].bq);
+                    cb(Qcur, "Qcur", il);
+                }
+
+                struct ggml_tensor * Kcur = llm_build_lora_mm(lctx, ctx0, model.layers[local_il].wk, cur);
+                cb(Kcur, "Kcur", il);
+                if (model.layers[local_il].bk) {
+                    Kcur = ggml_add(ctx0, Kcur, model.layers[local_il].bk);
+                    cb(Kcur, "Kcur", il);
+                }
+
+                struct ggml_tensor * Vcur = llm_build_lora_mm(lctx, ctx0, model.layers[local_il].wv, cur);
+                cb(Vcur, "Vcur", il);
+                if (model.layers[local_il].bv) {
+                    Vcur = ggml_add(ctx0, Vcur, model.layers[local_il].bv);
+                    cb(Vcur, "Vcur", il);
+                }
+
+                // reshape to per-head format for Qwen3/35
+                Qcur = ggml_reshape_3d(ctx0, Qcur, n_embd_head, n_head,    n_tokens);
+                Kcur = ggml_reshape_3d(ctx0, Kcur, n_embd_head, n_head_kv, n_tokens);
+                Vcur = ggml_reshape_3d(ctx0, Vcur, n_embd_head, n_head_kv, n_tokens);
+
+                // apply q_norm and k_norm for Qwen3/35 (per-head normalization)
+                if (model.layers[local_il].attn_q_norm) {
+                    Qcur = llm_build_norm(ctx0, Qcur, hparams,
+                        model.layers[local_il].attn_q_norm, NULL,
+                        LLM_NORM_RMS, cb, il);
+                    cb(Qcur, "Qcur_norm", il);
+                }
+                if (model.layers[local_il].attn_k_norm) {
+                    Kcur = llm_build_norm(ctx0, Kcur, hparams,
+                        model.layers[local_il].attn_k_norm, NULL,
+                        LLM_NORM_RMS, cb, il);
+                    cb(Kcur, "Kcur_norm", il);
+                }
+
+                Qcur = ggml_rope_ext(
+                    ctx0, Qcur, inp_pos, nullptr,
+                    n_rot, rope_type, n_ctx_orig, freq_base, freq_scale,
+                    ext_factor, attn_factor, beta_fast, beta_slow
+                );
+                cb(Qcur, "Qcur", il);
+
+                Kcur = ggml_rope_ext(
+                    ctx0, Kcur, inp_pos, nullptr,
+                    n_rot, rope_type, n_ctx_orig, freq_base, freq_scale,
+                    ext_factor, attn_factor, beta_fast, beta_slow
+                );
+                cb(Kcur, "Kcur", il);
+
+                cur = llm_build_kv(ctx0, lctx, kv_self, sub_gf,
+                    model.layers[local_il].wo, model.layers[local_il].bo,
+                    Kcur, Vcur, Qcur, KQ_mask, n_tokens, kv_head, n_kv, 1.0f/sqrtf(float(n_embd_head)), cb, il);
+            }
+
+            if (il == n_layer - 1) {
+                // skip computing output for unused tokens
+                struct ggml_tensor * inp_out_ids = build_inp_out_ids();
+                cur   = ggml_get_rows(ctx0,   cur, inp_out_ids);
+                inpSA = ggml_get_rows(ctx0, inpSA, inp_out_ids);
+            }
+
+            struct ggml_tensor * ffn_inp = ggml_add(ctx0, cur, inpSA);
+            cb(ffn_inp, "ffn_inp", il);
+
+            // feed-forward network
+            cur = llm_build_norm(ctx0, ffn_inp, hparams,
+                    model.layers[local_il].ffn_norm, NULL,
+                    LLM_NORM_RMS, cb, il);
+            cb(cur, "ffn_norm", il);
+
+            cur = llm_build_ffn(ctx0, lctx, cur,
+                    model.layers[local_il].ffn_up,   NULL, NULL,
+                    model.layers[local_il].ffn_gate, NULL, NULL,
+                    model.layers[local_il].ffn_down, NULL, NULL,
+                    NULL,
+                    LLM_FFN_SILU, LLM_FFN_PAR, cb, il);
+            cb(cur, "ffn_out", il);
+
+            cur = ggml_add(ctx0, cur, ffn_inp); // shortcut
+            cur = lctx.cvec.apply_to(ctx0, cur, il);
+            cb(cur, "l_out", il);
+
+            // input for next layer
+            inpL = cur;
+        }
+
+        // add the last active sub-graph to the list
+        if (sub_gf != nullptr) {
+            ggml_build_forward_expand(sub_gf, cur);
+            sub_gfs.push_back(sub_gf);
+            sub_gf = nullptr;
+        }
+
+        // output norm and lm_head
+        if (my_rank == 0) {
+            // start a new sub-graph for the output
+            sub_gf = ggml_new_graph_custom(ctx0, llama_model_max_nodes(model), false);
+
+            cur = llm_build_out_embd(ctx0, lctx, hparams, cb);
+
+            cur = llm_build_norm(ctx0, cur, hparams,
+                    model.output_norm, NULL,
+                    LLM_NORM_RMS, cb, -1);
+            cb(cur, "result_norm", -1);
+
+            // lm_head
+            cur = llm_build_lora_mm(lctx, ctx0, model.output, cur);
+            cb(cur, "result_output", -1);
+
+            ggml_build_forward_expand(sub_gf, cur);
+            sub_gfs.push_back(sub_gf);
+            sub_gf = nullptr;
+        }
+
+        return sub_gfs;
+    }
+
     struct ggml_cgraph * build_qwen2moe() {
         struct ggml_cgraph * gf = ggml_new_graph_custom(ctx0, llama_model_max_nodes(model), false);
 
@@ -16910,7 +17330,7 @@ static std::vector<struct ggml_cgraph *> llama_build_graph(
 
     llm.init();
 
-    GGML_ASSERT((model.arch == LLM_ARCH_LLAMA || model.arch == LLM_ARCH_QWEN2) && "this model is currently not supported");
+    GGML_ASSERT((model.arch == LLM_ARCH_LLAMA || model.arch == LLM_ARCH_QWEN2 || model.arch == LLM_ARCH_QWEN3 || model.arch == LLM_ARCH_QWEN35) && "this model is currently not supported");
 
     switch (model.arch) {
         case LLM_ARCH_LLAMA:
@@ -16966,7 +17386,14 @@ static std::vector<struct ggml_cgraph *> llama_build_graph(
                 // result.push_back(llm.build_qwen2()); 
                 result = llm.build_qwen2();
             } break;
+        case LLM_ARCH_QWEN3:
+        case LLM_ARCH_QWEN35:
+            {
+                result = llm.build_qwen35();
+            } break;
         case LLM_ARCH_QWEN2MOE:
+        case LLM_ARCH_QWEN3MOE:
+        case LLM_ARCH_QWEN35MOE:
             {
                 result.push_back(llm.build_qwen2moe());
             } break;
@@ -20901,6 +21328,10 @@ enum llama_rope_type llama_rope_type(const struct llama_model * model) {
         case LLM_ARCH_QWEN:
         case LLM_ARCH_QWEN2:
         case LLM_ARCH_QWEN2MOE:
+        case LLM_ARCH_QWEN3:
+        case LLM_ARCH_QWEN3MOE:
+        case LLM_ARCH_QWEN35:
+        case LLM_ARCH_QWEN35MOE:
         case LLM_ARCH_OLMOE:
         case LLM_ARCH_PHI2:
         case LLM_ARCH_PHI3:
@@ -21392,6 +21823,14 @@ void llama_model_n_flops(
                 llm_load_llama_tensors(*ml, *model, ctx_map, 1, 0, n_layer_window, &use_mmap_buffer, false);
                 break;
             case LLM_ARCH_QWEN2:
+            case LLM_ARCH_QWEN3:
+            case LLM_ARCH_QWEN35:
+                llm_load_qwen2_tensors(*ml, *model, ctx_map, 1, 0, n_layer_window, &use_mmap_buffer, false);
+                break;
+            case LLM_ARCH_QWEN2MOE:
+            case LLM_ARCH_QWEN3MOE:
+            case LLM_ARCH_QWEN35MOE:
+                // MoE variants use a different loader, for now use qwen2 loader
                 llm_load_qwen2_tensors(*ml, *model, ctx_map, 1, 0, n_layer_window, &use_mmap_buffer, false);
                 break;
             default:
