@@ -6174,11 +6174,10 @@ static void llm_load_hparams(
                 // Qwen3/35 uses q_norm and k_norm, similar to Qwen2
                 switch (hparams.n_layer) {
                     case 24: model.type = e_model::MODEL_1B; break;
-                    case 28: model.type = e_model::MODEL_3B; break;
-                    case 32: model.type = e_model::MODEL_7B; break;
+                    case 28: model.type = hparams.n_embd == 1024 ? e_model::MODEL_0_6B : e_model::MODEL_1_7B; break;
+                    case 36: model.type = hparams.n_embd == 2560 ? e_model::MODEL_4B : e_model::MODEL_8B; break;
                     case 40: model.type = e_model::MODEL_14B; break;
-                    case 48: model.type = e_model::MODEL_32B; break;
-                    case 64: model.type = e_model::MODEL_57B_A14B; break;
+                    case 64: model.type = e_model::MODEL_32B; break;
                     default: model.type = e_model::MODEL_UNKNOWN;
                 }
             } break;
