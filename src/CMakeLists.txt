@@ -20,12 +20,13 @@ add_library(llama
             unicode.h
             unicode.cpp
             unicode-data.cpp
+            device.cpp
             )
 
 target_include_directories(llama PUBLIC . ../include)
 target_compile_features   (llama PUBLIC cxx_std_11) # don't bump
 
-target_link_libraries(llama PUBLIC ggml)
+target_link_libraries(llama PUBLIC ggml zmq)
 
 if (BUILD_SHARED_LIBS)
     set_target_properties(llama PROPERTIES POSITION_INDEPENDENT_CODE ON)
